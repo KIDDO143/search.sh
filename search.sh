@@ -21,6 +21,12 @@ if ! [ "$(command -v fzf)" ]; then
 	exit 2
 fi
 
+# Checking if xdg-open binary exist or not
+if ! [ "$(command -v xdg-open)" ]; then
+	echo "Check xdg-open is installed in your system in or not"
+	exit 2
+fi
+
 if [[ $# -gt 0 ]]
 	then
 		array=( "$@" )
