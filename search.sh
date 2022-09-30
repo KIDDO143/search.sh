@@ -81,7 +81,7 @@ function search_and_match () {
 
 if [ "$searched_file" == "" ]
     then
-        echo "Nothing found ;-) LOL"
+        echo "Nothing found..."
     else
     	file_base=$(basename "$searched_file")
         extension=${file_base##*.}
