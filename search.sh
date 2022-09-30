@@ -15,6 +15,11 @@ if [ "$(command -v swallow)" ]; then
 	PHOTO_VIEWER="swallow $PHOTO_VIEWER"
 fi
 
+# Checking if fzf binary exist or not
+if ! [ "$(command -v fzf)" ]; then
+	echo "Install fzf first"
+	exit 2
+fi
 
 if [[ $# -gt 0 ]]
 	then
@@ -69,19 +74,19 @@ function search_and_match () {
 
     if [[ $(file --mime "$searched_file" | grep -oh "\w*charset=\w*") != "charset=binary" ]]; then
 		echo "\"$searched_file\"" | xclip -selection clipboard
-		echo "$searched_file  |  Copied to your clipborad"
+		echo "$searched_file | Copied to your clipborad"
 		$EDITOR "$searched_file" 
 	else
 		$XDG_OPEN "$searched_file"
 		echo "\"$searched_file\"" | xclip -selection clipboard
-		echo "$searched_file  |  Copied to your clipborad"
+		echo "$searched_file | Copied to your clipborad"
 	fi
 	
 }
 
 if [ "$searched_file" == "" ]
     then
-        echo "Nothing found ;-) LOL"
+        echo "Nothing found..."
     else
     	file_base=$(basename "$searched_file")
         extension=${file_base##*.}
